@@ -19,6 +19,10 @@ class App extends React.Component {
       this.handleChange = this.handleChange.bind(this)
       this.handleSubmit = this.handleSubmit.bind(this)
       // this.getCookie = this.getCookie.bind(this)
+      this.delete = this.delete.bind(this)
+      this.startEdit = this.startEdit.bind(this)
+
+
 
 
   };
@@ -108,6 +112,19 @@ class App extends React.Component {
     })
   }
 
+  delete(task){
+    var url = `http://127.0.0.1:8000/api/deletetask/${task.id}/`
+    fetch(url, {
+      'method': 'DELETE',
+      'headers':{
+        'Content-type':'application/json',
+        // 'X-CSFRToken':csrftoken
+      },
+  }).then((response) => {
+    this.fetchTasks()
+  })
+}
+
   render(){
     var tasks = this.state.todoList
     var self = this
@@ -141,7 +158,7 @@ class App extends React.Component {
                   </div>
 
                   <div style={{flex:1}}>
-                    <button className='btn btn-sm btn-outline-dark delete'>Delete</button>
+                    <button onClick={() => self.delete(task)} className='btn btn-sm btn-outline-dark delete'>Delete</button>
                   </div>
 
                 </div>
