@@ -21,9 +21,7 @@ class App extends React.Component {
       // this.getCookie = this.getCookie.bind(this)
       this.delete = this.delete.bind(this)
       this.startEdit = this.startEdit.bind(this)
-
-
-
+      this.strikeUnstrike = this.strikeUnstrike.bind(this)
 
   };
 
@@ -125,6 +123,22 @@ class App extends React.Component {
   })
 }
 
+strikeUnstrike(task){
+  task.isCompleted = !task.isCompleted
+  var url = `http://127.0.0.1:8000/api/edittask/${task.id}/`
+  fetch(url, {
+    method: 'POST',
+    headers:{
+      'Content-type':'application/json',
+      // 'X-CSFRToken':csrftoken
+    },
+    body:JSON.stringify({'isCompleted': task.isCompleted, 'name':task.name})
+}).then(() => {
+  this.fetchTasks()
+})
+  
+}
+
   render(){
     var tasks = this.state.todoList
     var self = this
@@ -149,8 +163,13 @@ class App extends React.Component {
               return(
                 <div key={index} className="task-wrapper flex-wrapper">
 
-                  <div style={{flex:7}}>
-                    <span>{task.name}</span>
+                  <div onClick={() => self.strikeUnstrike(task)} style={{flex:7}}>
+                    {task.isCompleted == false ?(
+                      <span>{task.name}</span>
+                    ) : (
+                      <strike>{task.name}</strike>
+                    )}
+                    
                   </div>
 
                   <div style={{flex:1}}>
