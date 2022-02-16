@@ -7,7 +7,7 @@ services:
     
     build:
       context: .
-      dockerfile: django_dockefile
+      dockerfile: django_dockerfile
   
   front:
     ports:
