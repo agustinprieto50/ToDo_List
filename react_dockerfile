@@ -1,6 +1,7 @@
 FROM node:14.18.1
-RUN mkdir /todo_react
-WORKDIR /todo_react
+RUN mkdir /todo-react
+WORKDIR /todo-react
 ENV PATH /todo_react/node_modules/.bin:$PATH
-ADD todo_react/ /todo_react/
+ADD todo-react/ /todo-react/
+RUN npm install react-scripts@3.4.1 -g 
 CMD npm start
