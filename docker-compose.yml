@@ -15,7 +15,7 @@ services:
     
     build:
       context: .
-      dockerfile: react_dockefile
+      dockerfile: react_dockerfile
     
 
 

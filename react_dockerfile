@@ -1,0 +1,6 @@
+FROM node:14.18.1
+RUN mkdir /todo_react
+WORKDIR /todo_react
+ENV PATH /todo_react/node_modules/.bin:$PATH
+ADD todo_react/ /todo_react/
+CMD npm start
